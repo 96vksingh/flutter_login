@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class LoginPage extends StatefulWidget{
 
@@ -12,6 +13,13 @@ class LoginPage extends StatefulWidget{
 class _LoginPageState extends State<LoginPage>{
 
   final formkey = new GlobalKey<FormState>();
+
+  // num = List(5);
+  // num[0]= 1;
+
+
+
+   
 
   String _email;
   String _password;
@@ -45,8 +53,11 @@ AuthResult user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: 
   }
 }
 
+
 void register(){
-  
+
+  print("hi");
+
 }
   
   @override
@@ -82,7 +93,7 @@ void register(){
                   onPressed: login
                   
                   ),
-                  new FlatButton(onPressed: resgister,
+                  new FlatButton(onPressed: register,
                   child: new Text("Create an account", style: new TextStyle( fontSize: 20.0),)
                   )
 
