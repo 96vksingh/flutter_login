@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget{
    LoginPage({this.auth});
    final BaseAuth auth;
   @override
   State<StatefulWidget> createState() => new _LoginPageState();
-
 
 }
 
@@ -90,26 +90,57 @@ void register(){
   
   @override
   Widget build(BuildContext context) {
- 
+
     return new Scaffold(
+    backgroundColor: Colors.white,
       appBar: new AppBar(
-        title :new Text('Flutter login'),
+        title :Center(child: new Text('Charcha')),
       ),
-      body: new Container(
-          child: new Form(
-            key: formkey,
-
-
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: forms(),
+      body: Column(
+        children : <Widget>[
+          SizedBox(height: 35.0,),
+          Icon(
+            Icons.account_circle,
+            size: 60.0,
+            color: Colors.lightBlue,
+          ),
+          //SizedBox(height: 10.0,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0,0.0,20.0,5.0),
+              child: Form(
+              key: formkey,
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: forms(),
+              ),
+              ),
             ),
-            
-            ),
+          Text("developers:"),
 
-          )
-        
-        
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                onTap: _launchURLAd,
+                child : Image.asset('assets/imgad.png',
+                  width: 125,
+                  height:200,
+                  fit:BoxFit.fill,
+              ),
+              ),
+              GestureDetector(
+                onTap: _launchURLVk,
+                child : Image.asset('assets/imgvk.png',
+                  width: 125,
+                  height:200,
+                  fit:BoxFit.fill,
+                ),
+              ),
+            ],
+          ),
+        ],
+
+      ),
     );
   }
 
@@ -130,15 +161,16 @@ void register(){
                   obscureText: true,
                   onSaved: (value) => _password=value
                 ),
+        SizedBox(height:25.0),
         new RaisedButton(
-                  
                   child: new Text('Login',style: new TextStyle( fontSize: 20.0 )),
-                  onPressed: login
+                  onPressed: login,
+               color: Colors.lightBlue,
                   
                   ),
         new FlatButton(onPressed: register,
                   child: new Text("Create an account", style: new TextStyle( fontSize: 20.0),)
-                  )
+                  ),
 
       ];
 
@@ -170,7 +202,7 @@ void register(){
         new FlatButton(onPressed: loginback,
                   child: new Text("Already have an account? Login", style: new TextStyle( fontSize: 20.0),)
                   )
-        
+
 
       ];
 
@@ -183,6 +215,21 @@ void register(){
 
 // made some change
 
-
+_launchURLAd() async {
+  const url = 'https://github.com/ideallyadarsh';
+  if (await canLaunch("https://github.com/ideallyadarsh")) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+_launchURLVk() async {
+  const url = 'https://github.com/96vksingh';
+  if (await canLaunch("https://github.com/96vksingh")) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 
